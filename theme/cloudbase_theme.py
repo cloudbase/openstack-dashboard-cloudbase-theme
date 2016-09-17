@@ -4,10 +4,9 @@
 # openstack-dashboard-cloudbase-theme package, or remove this file.
 import os
 
-CLOUDBASE_THEME = "/usr/share/openstack-dashboard-cloudbase-theme/static/themes/cloudbase"
+CLOUDBASE_THEME = "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase"
 
 if os.path.exists(CLOUDBASE_THEME):
     AVAILABLE_THEMES = [
         ('cloudbase', 'Cloudbase', CLOUDBASE_THEME),
     ]
-

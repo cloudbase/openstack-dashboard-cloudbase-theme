@@ -16,7 +16,6 @@ Requires:       openstack-dashboard >= 9.0.0
 Provides a Cloudbase Solutions openstack-dashboard (Horizon) theme and overrides the default one.
 
 %prep
-wget -O $RPM_SOURCE_DIR/%{version}.tar.gz https://github.com/cloudbase/openstack-dashboard-cloudbase-theme/archive/%{version}.tar.gz
 %setup -q
 
 %install

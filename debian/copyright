@@ -1,15 +1,9 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: openstack-dashboard-cloudbase-theme
-Source: https://github.com/cloudbase/horizon-cloudbase
+Source: https://github.com/cloudbase/openstack-dashboard-cloudbase-theme
 
 Files: *
-Copyright: 2016 Cloudbase Solutions 
-
-License: Apache-2.0
-
-Files: debian/*
-Copyright: 2016 Costin Galan <cgalan@cloudbasesolutions.com>
-License: Apache-2.0
+Copyright: 2016 Dorin Paslaru <dpaslaru@cloudbasesolutions.com>
 
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,4 +20,3 @@ License: Apache-2.0
  .
  On Debian systems, the complete text of the Apache version 2.0 license
  can be found in "/usr/share/common-licenses/Apache-2.0".
-

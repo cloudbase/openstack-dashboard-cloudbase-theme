@@ -1,2 +1,1 @@
 theme/cloudbase/* /usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase
-theme/cloudbase_theme.py /usr/share/openstack-dashboard/openstack_dashboard/local

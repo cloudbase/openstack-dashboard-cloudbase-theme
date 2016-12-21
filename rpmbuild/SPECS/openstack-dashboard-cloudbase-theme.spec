@@ -1,5 +1,5 @@
 Name:           openstack-dashboard-cloudbase-theme
-Version:        9.0.1
+Version:        10.0.0
 Release:        0
 Summary:        Cloudbase Theme for the OpenStack Dashboard (Horizon)
 
@@ -9,8 +9,8 @@ Source0:        https://github.com/cloudbase/openstack-dashboard-cloudbase-theme
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-buildroot
 
-Provides:       openstack-dashboard-cloudbase-theme = 9.0.1
-Requires:       openstack-dashboard >= 9.0.0
+Provides:       openstack-dashboard-cloudbase-theme = 10.0.0
+Requires:       openstack-dashboard >= 10.0.0
 
 %description
 Provides a Cloudbase Solutions openstack-dashboard (Horizon) theme and overrides the default one.
@@ -23,7 +23,6 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase
 mkdir -p $RPM_BUILD_ROOT/usr/share/openstack-dashboard/openstack_dashboard/local
 cp -R $RPM_BUILD_DIR/%{name}-%{version}/theme/cloudbase/* $RPM_BUILD_ROOT/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/
-cp $RPM_BUILD_DIR/%{name}-%{version}/theme/cloudbase_theme.py $RPM_BUILD_ROOT/usr/share/openstack-dashboard/openstack_dashboard/local/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -65,7 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/header/_header.html"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon/_sidebar.html"
-%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.py"
 %exclude /usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.pyc
 %exclude /usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.pyo
 
@@ -75,20 +73,16 @@ rm -rf $RPM_BUILD_ROOT
 set -e
 
 (
-cat <<EOF >> /etc/openstack-dashboard/local_settings
-# Cloudbase Dashboard Theme Settings
-########################################
-# Enable the Cloudbase Solutions theme if it is present.
-try:
-    from cloudbase_theme import *
-except ImportError:
-    pass
-
-########################################
-# End Cloudbase Dashboard Theme Settings
-EOF
+cat >>/etc/openstack-dashboard/local_settings <<'EOL'
+# Cloudbase Theme Settings
+AVAILABLE_THEMES = [
+      (
+          'cloudbase','Cloudbase','themes/cloudbase'
+      ),
+  ]
+# End of Cloudbase Theme Settings
+EOL
 )
-
 cd /usr/share/openstack-dashboard
 echo "Collecting and compressing static assets..."
 rm -f /usr/share/openstack-dashboard/openstack_dashboard/local/*.pyc || :
@@ -99,15 +93,13 @@ python manage.py compress --force 2>&1 > /dev/null
 echo "Restarting apache..."
 service httpd restart
 
-
-
 %postun -p /bin/sh
 #!/bin/sh
 
 set -e
 
 (
-  sed '/# Cloudbase Dashboard Theme Settings/,/# End Cloudbase Dashboard Theme Settings/d' /etc/openstack-dashboard/local_settings -i
+  sed -i '/# Cloudbase/,/^$/d' /etc/openstack-dashboard/local_settings
   cd /usr/share/openstack-dashboard
   echo "Collecting and compressing static assets..."
   rm -f /usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.pyc
@@ -120,6 +112,8 @@ echo "Restarting apache..."
 service httpd restart
 
 %changelog
+* Wed Dec 21 2016 Dorin Paslaru
+- 10.0.0 Newton release
 * Fri Sep 16 2016 Dorin Paslaru
 - 9.0.1 Mitaka second release; Minor fix to a path name
 * Fri Jul 29 2016 Dorin Paslaru

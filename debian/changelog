@@ -1,3 +1,9 @@
+openstack-dashboard-cloudbase-theme (11.0.0-0ubuntu1) xenial; urgency=medium
+
+  * Ocata update
+
+ -- Dorin Paslaru <dpaslaru@cloudbasesolutions.com>  Fri, 17 Mar 2017 11:00:00 +0300
+
 openstack-dashboard-cloudbase-theme (10.0.1-0ubuntu1) xenial; urgency=medium
 
   * Minor update

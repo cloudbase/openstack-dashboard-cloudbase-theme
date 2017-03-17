@@ -18,16 +18,16 @@ set -e
 
 if [ "$1" = "configure" ]; then
 (
-cat >>/etc/openstack-dashboard/local_settings.py <<'EOL'
-# Cloudbase Theme Settings
-AVAILABLE_THEMES = [
-      (
-          'cloudbase','Cloudbase','themes/cloudbase'
-      ),
-  ]
-# End of Cloudbase Theme Settings
-
-EOL
+# cat >>/etc/openstack-dashboard/local_settings.py <<'EOL'
+# # Cloudbase Theme Settings
+# AVAILABLE_THEMES = [
+#       (
+#           'cloudbase','Cloudbase','themes/cloudbase'
+#       ),
+#   ]
+# # End of Cloudbase Theme Settings
+#
+# EOL
 sed -i 's/ubuntu/cloudbase/g' /etc/openstack-dashboard/local_settings.py
 cd /usr/share/openstack-dashboard
 echo "Collecting and compressing static assets..."

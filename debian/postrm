@@ -20,7 +20,7 @@ case "$1" in
     remove)
         if [ -f /usr/share/openstack-dashboard/manage.py ]; then
             (
-              sed -i '/# Cloudbase/,/^$/d' /etc/openstack-dashboard/local_settings.py
+            #   sed -i '/# Cloudbase/,/^$/d' /etc/openstack-dashboard/local_settings.py
               sed -i 's/cloudbase/ubuntu/g' /etc/openstack-dashboard/local_settings.py
               cd /usr/share/openstack-dashboard
               echo "Collecting and compressing static assets..."

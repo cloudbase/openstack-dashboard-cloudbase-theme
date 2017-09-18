@@ -1,29 +1,34 @@
+@import "animations";
 @import "icons";
-@import "components/context_selection";
-@import "components/messages";
 @import "components/checkboxes";
+@import "components/context_selection";
+@import "components/datepicker";
+@import "components/dropdowns";
 @import "components/hamburger";
 @import "components/help_panel";
+@import "components/loader_circular_example";
+@import "components/loader_line_example";
+@import "components/loader_spinner";
 @import "components/magic_search";
+@import "components/messages";
 @import "components/navbar";
+@import "components/progress_bars";
+@import "components/radiobuttons";
+@import "components/selects";
 @import "components/sidebar";
+@import "components/spinners";
+@import "components/trees";
 
 .login .splash-logo {
   width: 215px;
-}
-
-// General Layout Changes
-#sidebar {
-  position: fixed;
-  display: block;
 }
 
 #content_body {
   transition: padding-left $sidebar-animation;
   display: block;
 
-  @media (min-width: $screen-lg) {
-    padding-left: $sidebar-width;
+  @media (max-width: $screen-lg) {
+    padding-left: 0;
   }
 }
 

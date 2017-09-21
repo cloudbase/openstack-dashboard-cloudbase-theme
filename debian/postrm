@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2016 Cloudbase Solutions Srl
+# Copyright 2017 Cloudbase Solutions Srl
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -16,14 +16,17 @@
 
 set -e
 
+locals_file=/etc/openstack-dashboard/local_settings.py
+
 case "$1" in
     remove)
         if [ -f /usr/share/openstack-dashboard/manage.py ]; then
             (
-              sed -i '/# Cloudbase/,/^$/d' /etc/openstack-dashboard/local_settings.py
-              sed -i 's/cloudbase/ubuntu/g' /etc/openstack-dashboard/local_settings.py
+              echo "Removing the Cloudbase Theme configuration ..."
+              sed -i '/# Cloudbase/,/^$/d' "$locals_file"
+              sed -i 's/cloudbase/ubuntu/g' "$locals_file"
               cd /usr/share/openstack-dashboard
-              echo "Collecting and compressing static assets..."
+              echo "Collecting and compressing static assets ..."
               rm -rf /usr/share/openstack-dashboard/static/custom/* || :
               python manage.py collectstatic --noinput 2>&1 > /dev/null
               python manage.py compress --force 2>&1 > /dev/null

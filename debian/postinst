@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2016 Cloudbase Solutions Srl
+# Copyright 2017 Cloudbase Solutions Srl
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -15,10 +15,19 @@
 #    under the License.
 
 set -e
+locals_file=/etc/openstack-dashboard/local_settings.py
 
 if [ "$1" = "configure" ]; then
 (
-cat >>/etc/openstack-dashboard/local_settings.py <<'EOL'
+if [ ! -f "$locals_file" ]; then
+   echo "\n   Failed to automatically configure the Cloudbase Theme \n\
+   in $locals_file \n\n\
+   Please manually add \"('cloudbase','Cloudbase','themes/cloudbase')\" to the \n\
+   \"AVAILABLE_THEMES\" array in your local_settings file. \n\
+   More info on https://docs.openstack.org/horizon/latest/configuration/themes.html\n"
+else
+    echo "Configuring the Cloudbase Theme ..."
+cat >>"$locals_file" <<'EOL'
 # Cloudbase Theme Settings
 AVAILABLE_THEMES = [
       (
@@ -26,17 +35,19 @@ AVAILABLE_THEMES = [
       ),
   ]
 # End of Cloudbase Theme Settings
-
 EOL
-sed -i 's/ubuntu/cloudbase/g' /etc/openstack-dashboard/local_settings.py
+
+sed -i 's/ubuntu/cloudbase/g' "$locals_file"
+
+fi
+
 cd /usr/share/openstack-dashboard
-echo "Collecting and compressing static assets..."
+echo "Collecting and compressing static assets ..."
 rm -rf /usr/share/openstack-dashboard/static/custom/* || :
 python manage.py collectstatic --noinput 2>&1 > /dev/null
 python manage.py compress --force 2>&1 > /dev/null
 )
-
-  if [ -x "`which invoke-rc.d 2>/dev/null`" -a -x "/etc/init.d/apache2" ] ; then
-    invoke-rc.d --quiet apache2 reload
-  fi
+if [ -x "`which invoke-rc.d 2>/dev/null`" -a -x "/etc/init.d/apache2" ] ; then
+invoke-rc.d --quiet apache2 reload
+fi
 fi

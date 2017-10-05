@@ -15,7 +15,7 @@ wget -O rpmbuild/SPECS/openstack-dashboard-cloudbase-theme.spec https://raw.gith
 ```
 Now edit the file and make the apropiate changes (version, changelog etc.)
 
-Download latest sources; Replace `$RPM_SOURCE_DIR` with your `rmpbuild/SOURCES` folder; Replace %{version} with the desired version from github
+Download latest sources; Replace `$RPM_SOURCE_DIR` with your `rpmbuild/SOURCES` folder; Replace %{version} with the desired version from github
 ```sh
 wget -O $RPM_SOURCE_DIR/%{version}.tar.gz https://github.com/cloudbase/openstack-dashboard-cloudbase-theme/archive/%{version}.tar.gz
 ```

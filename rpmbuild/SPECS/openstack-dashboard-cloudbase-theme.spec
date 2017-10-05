@@ -1,5 +1,5 @@
 Name:           openstack-dashboard-cloudbase-theme
-Version:        10.0.0
+Version:        12.0.0
 Release:        0
 Summary:        Cloudbase Theme for the OpenStack Dashboard (Horizon)
 
@@ -9,8 +9,8 @@ Source0:        https://github.com/cloudbase/openstack-dashboard-cloudbase-theme
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-buildroot
 
-Provides:       openstack-dashboard-cloudbase-theme = 10.0.0
-Requires:       openstack-dashboard >= 10.0.0
+Provides:       openstack-dashboard-cloudbase-theme = 12.0.0
+Requires:       openstack-dashboard >= 12.0.0
 
 %description
 Provides a Cloudbase Solutions openstack-dashboard (Horizon) theme and overrides the default one.
@@ -40,18 +40,29 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/bootstrap/_variable_customizations.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/bootstrap/_variables.scss"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/_animations.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/_icons.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/_styles.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/_variables.scss"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_checkboxes.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_context_selection.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_datepicker.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_dropdowns.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_hamburger.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_help_panel.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_loader_circular_example.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_loader_line_example.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_loader_spinner.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_magic_search.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_messages.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_navbar.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_progress_bars.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_radiobuttons.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_selects.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_sidebar.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_spinners.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/components/_trees.scss"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/js"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/js/material.hamburger.js"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates"
@@ -112,6 +123,8 @@ echo "Restarting apache..."
 service httpd restart
 
 %changelog
+* Thu Oct 5 2017 Dorin Paslaru
+- 12.0.0 Pike release
 * Wed Dec 21 2016 Dorin Paslaru
 - 10.0.0 Newton release
 * Fri Sep 16 2016 Dorin Paslaru

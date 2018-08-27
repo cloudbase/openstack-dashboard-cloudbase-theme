@@ -1,5 +1,5 @@
 Name:           openstack-dashboard-cloudbase-theme
-Version:        12.0.0
+Version:        13.0.0
 Release:        0
 Summary:        Cloudbase Theme for the OpenStack Dashboard (Horizon)
 
@@ -9,8 +9,8 @@ Source0:        https://github.com/cloudbase/openstack-dashboard-cloudbase-theme
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-buildroot
 
-Provides:       openstack-dashboard-cloudbase-theme = 12.0.0
-Requires:       openstack-dashboard >= 12.0.0
+Provides:       openstack-dashboard-cloudbase-theme = 13.0.0
+Requires:       openstack-dashboard >= 13.0.0
 
 %description
 Provides a Cloudbase Solutions openstack-dashboard (Horizon) theme and overrides the default one.
@@ -123,6 +123,8 @@ echo "Restarting apache..."
 service httpd restart
 
 %changelog
+* Mon Aug 27 2018 Dorin Paslaru
+- 13.0.0 Queens release
 * Thu Oct 5 2017 Dorin Paslaru
 - 12.0.0 Pike release
 * Wed Dec 21 2016 Dorin Paslaru

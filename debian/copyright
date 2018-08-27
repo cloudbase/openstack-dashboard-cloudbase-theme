@@ -3,7 +3,7 @@ Upstream-Name: openstack-dashboard-cloudbase-theme
 Source: https://github.com/cloudbase/openstack-dashboard-cloudbase-theme
 
 Files: *
-Copyright: 2017 Dorin Paslaru <dpaslaru@cloudbasesolutions.com>
+Copyright: 2018 Dorin Paslaru <dpaslaru@cloudbasesolutions.com>
 
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");

@@ -1,3 +1,9 @@
+openstack-dashboard-cloudbase-theme (13.0.1-0ubuntu1) bionic; urgency=medium
+
+  * Queens fixes
+
+ -- Dorin Paslaru <dpaslaru@cloudbasesolutions.com>  Thu, 20 Sept 2018 10:00:00 +0200
+
 openstack-dashboard-cloudbase-theme (13.0.0-0ubuntu1) bionic; urgency=medium
 
   * Queens update

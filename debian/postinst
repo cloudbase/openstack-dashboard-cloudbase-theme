@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2018 Cloudbase Solutions Srl
+# Copyright 2016-2018 Cloudbase Solutions Srl
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -18,7 +18,16 @@ set -e
 locals_file=/etc/openstack-dashboard/local_settings.py
 
 if [ "$1" = "configure" ]; then
+  if ! getent group horizon > /dev/null 2>&1 ; then
+    addgroup --system horizon >/dev/null
+  fi
+
+  if ! getent passwd horizon > /dev/null 2>&1 ; then
+    adduser --system --home /var/lib/openstack-dashboard --ingroup horizon \
+            --no-create-home --shell /bin/false horizon
+  fi
 (
+
 if [ ! -f "$locals_file" ]; then
    echo "\n   Failed to automatically configure the Cloudbase Theme \n\
    in $locals_file \n\n\
@@ -26,7 +35,8 @@ if [ ! -f "$locals_file" ]; then
    \"AVAILABLE_THEMES\" array in your local_settings file. \n\
    More info on https://docs.openstack.org/horizon/latest/configuration/themes.html\n"
 else
-    echo "Configuring the Cloudbase Theme ..."
+
+echo "Configuring the Cloudbase Theme ..."
 cat >>"$locals_file" <<'EOL'
 # Cloudbase Theme Settings
 AVAILABLE_THEMES = [
@@ -38,16 +48,39 @@ AVAILABLE_THEMES = [
 EOL
 
 sed -i 's/ubuntu/cloudbase/g' "$locals_file"
-
 fi
 
 cd /usr/share/openstack-dashboard
-echo "Collecting and compressing static assets ..."
-rm -rf /usr/share/openstack-dashboard/static/custom/* || :
+echo "Collecting and compressing static assets..."
+rm -rf /var/lib/openstack-dashboard/static/ || :
 python manage.py collectstatic --noinput 2>&1 > /dev/null
 python manage.py compress --force 2>&1 > /dev/null
+
 )
-if [ -x "`which invoke-rc.d 2>/dev/null`" -a -x "/etc/init.d/apache2" ] ; then
-invoke-rc.d --quiet apache2 reload
-fi
+
+  if [ -e /var/lib/openstack-dashboard ] ; then
+    chown -R horizon:horizon /var/lib/openstack-dashboard
+  fi
+
+  if [ -d /etc/openstack-dashboard/ ] ; then
+    chown root:horizon /etc/openstack-dashboard/
+    chmod 0750 /etc/openstack-dashboard/
+  fi
+
+  if [ -f /etc/openstack-dashboard/local_settings.py ]; then
+    chown root:horizon /etc/openstack-dashboard/local_settings.py
+    chmod 0640 /etc/openstack-dashboard/local_settings.py
+  fi
+
+  if [ -d /var/lib/openstack-dashboard ] ; then
+      chmod 755 /var/lib/openstack-dashboard
+  fi
+
+  if [ -e /var/lib/openstack-dashboard/secret_key ] ; then
+      chmod 600 /var/lib/openstack-dashboard/secret_key
+  fi
+
+  if [ -x "`which invoke-rc.d 2>/dev/null`" -a -x "/etc/init.d/apache2" ] ; then
+  invoke-rc.d --quiet apache2 reload
+  fi
 fi

@@ -50,9 +50,7 @@
   }
 
   .openstack-panel > a {
-    // padding: $padding-small-horizontal $font-size-h4 $padding-small-horizontal ($font-size-h1 - $padding-small-horizontal);
-    // padding: 10px 24px 10px 54px;
-    padding: $padding-small-horizontal $font-size-h4 $padding-small-horizontal 54px;
+    padding: $padding-small-horizontal $font-size-h4 $padding-small-horizontal ($font-size-h1 - $padding-small-horizontal);
     text-align: left;
 
     &.active {

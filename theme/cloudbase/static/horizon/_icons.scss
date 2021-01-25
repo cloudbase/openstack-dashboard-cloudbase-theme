@@ -5,7 +5,9 @@
 // https://materialdesignicons.com
 
 $mdi-font-path: $static_url + "/horizon/lib/mdi/fonts";
-@import "/horizon/lib/mdi/scss/materialdesignicons.scss";
+// @import "/horizon/lib/mdi/scss/materialdesignicons.scss";
+@import "/themes/cloudbase/assets/materialdesignicons/css/materialdesignicons.css";
+
 
 .fa {
   @extend .mdi;

@@ -9,7 +9,7 @@ Homepage: https://launchpad.net/openstack-dashboard-cloudbase-theme
 Package: openstack-dashboard-cloudbase-theme
 Architecture: all
 Depends: ${misc:Depends},
-         openstack-dashboard (>= 3:18.3.2-0ubuntu0), openstack-dashboard (<< 3:18.3.3)
+         openstack-dashboard (>= 4:18.6.1-0ubuntu1), openstack-dashboard (<< 4:18.6.2)
 Description: Cloudbase Theme for the OpenStack Dashboard (Horizon)
  The Cloudbase Solutions theme for OpenStack Dashboard (Horizon).
  This package is optional and overrides the default theme and branding.

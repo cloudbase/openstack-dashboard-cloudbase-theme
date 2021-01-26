@@ -1,3 +1,9 @@
+openstack-dashboard-cloudbase-theme (18.6.1-0ubuntu1) groovy; urgency=medium
+
+  * Victoria updates
+
+ -- Sergiu Miclea <smiclea@cloudbasesolutions.com>  Tue, 27 Jan 2021 13:00:00 +0200
+
 openstack-dashboard-cloudbase-theme (18.3.2-0ubuntu0.20.04.4) focal; urgency=medium
 
   * Ussuri updates

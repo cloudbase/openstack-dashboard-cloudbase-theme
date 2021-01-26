@@ -1,2 +1,2 @@
 version=3
-https://github.com/cloudbase/horzion-cloudbase/tags .*/archive/(\d\S*)\.tar\.gz
+https://github.com/cloudbase/horizon-cloudbase/tags .*/archive/(\d\S*)\.tar\.gz

@@ -1,5 +1,5 @@
 Name:           openstack-dashboard-cloudbase-theme
-Version:        13.0.0
+Version:        18.3.2
 Release:        0
 Summary:        Cloudbase Theme for the OpenStack Dashboard (Horizon)
 
@@ -9,8 +9,8 @@ Source0:        https://github.com/cloudbase/openstack-dashboard-cloudbase-theme
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-buildroot
 
-Provides:       openstack-dashboard-cloudbase-theme = 13.0.0
-Requires:       openstack-dashboard >= 13.0.0
+Provides:       openstack-dashboard-cloudbase-theme = 18.3.2
+Requires:       openstack-dashboard >= 18.3.2
 
 %description
 Provides a Cloudbase Solutions openstack-dashboard (Horizon) theme and overrides the default one.
@@ -39,6 +39,26 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/bootstrap/_styles.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/bootstrap/_variable_customizations.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/bootstrap/_variables.scss"
+%dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons"
+%dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/css"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/css/materialdesignicons.css"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/css/materialdesignicons.css.map"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/css/materialdesignicons.min.css.map"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/css/materialdesignicons.min.css"
+%dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/fonts"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/fonts/materialdesignicons-webfont.eot"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/fonts/materialdesignicons-webfont.ttf"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/fonts/materialdesignicons-webfont.woff"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/fonts/materialdesignicons-webfont.woff2"
+%dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_animated.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_core.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_extras.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_functions.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_icons.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_path.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/_variables.scss"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/assets/materialdesignicons/scss/materialdesignicons.scss"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/_animations.scss"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/static/horizon/_icons.scss"
@@ -75,8 +95,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/header/_header.html"
 %dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon"
 %attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon/_sidebar.html"
-%exclude /usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.pyc
-%exclude /usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.pyo
+%dir %attr(0755, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon/client_side"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon/client_side/_confirm.html"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon/client_side/_loading_inline_example.html"
+%attr(0644, root, root) "/usr/share/openstack-dashboard/openstack_dashboard/themes/cloudbase/templates/horizon/client_side/_loading_modal_example.html"
 
 %post -p /bin/sh
 #!/bin/sh
@@ -98,8 +120,8 @@ cd /usr/share/openstack-dashboard
 echo "Collecting and compressing static assets..."
 rm -f /usr/share/openstack-dashboard/openstack_dashboard/local/*.pyc || :
 rm -f /usr/share/openstack-dashboard/static/custom/* || :
-python manage.py collectstatic --noinput 2>&1 > /dev/null
-python manage.py compress --force 2>&1 > /dev/null
+python3 manage.py collectstatic --noinput 2>&1 > /dev/null
+python3 manage.py compress --force 2>&1 > /dev/null
 
 echo "Restarting apache..."
 service httpd restart
@@ -115,14 +137,16 @@ set -e
   echo "Collecting and compressing static assets..."
   rm -f /usr/share/openstack-dashboard/openstack_dashboard/local/cloudbase_theme.pyc
   rm -f /usr/share/openstack-dashboard/static/custom/* || :
-  python manage.py collectstatic --noinput 2>&1 > /dev/null
-  python manage.py compress --force 2>&1 > /dev/null
+  python3 manage.py collectstatic --noinput 2>&1 > /dev/null
+  python3 manage.py compress --force 2>&1 > /dev/null
 )
 
 echo "Restarting apache..."
 service httpd restart
 
 %changelog
+* Tue Feb 2 2021 Sergiu Miclea
+- 18.3.2 Ussuri release
 * Mon Aug 27 2018 Dorin Paslaru
 - 13.0.0 Queens release
 * Thu Oct 5 2017 Dorin Paslaru
